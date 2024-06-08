@@ -1,7 +1,7 @@
 <template>
 
      <nav style="text-align: center;">
-        <Link v-for="link in links" :key="link.label" :href="link.url ?? ''"  v-html="link.label" class="text-secondary p-1" style="font-size: 20px;" :class=" {'active-style':link.active}"></Link>
+        <Link v-for="link in links" :key="link.label" :href="link.url ?? ''"  v-html="link.label" class="text-secondary p-1" style="font-size: 20px;" :class=" {'active-style':link.active,'text-danger':!link.url}"></Link>
      </nav>
 
 </template>

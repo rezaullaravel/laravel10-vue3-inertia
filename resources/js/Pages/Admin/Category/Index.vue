@@ -35,8 +35,8 @@
                                            <td>{{ index+1 }}</td>
                                            <td>{{ category.category_name }}</td>
                                            <td>
-                                             <Link class="btn btn-info">Edit</Link>
-                                             <Link class="btn btn-danger">Delete</Link>
+                                             <Link :href="`/edit/category/${category.id}`" class="btn btn-info">Edit</Link>
+                                             <button @click.prevent="deleteCategory(category.id)" class="btn btn-danger">Delete</button>
                                            </td>
                                         </tr>
 
@@ -44,8 +44,10 @@
                                 </table>
                               <!--pagination-->
 
-                                    <Pagination :links="categories.links"/>
-                                     
+                                    <div v-if="categories.data.length>1">
+                                        <Pagination :links="categories.links"/>
+                                    </div>
+
 
                                 <!--pagination end-->
                             </div>
@@ -61,10 +63,28 @@
 
 <script setup>
     import Master  from '../Master.vue';
-    import { Link,usePage } from '@inertiajs/vue3'
+    import { Link,usePage,router } from '@inertiajs/vue3'
     import Pagination  from '../../../components/Pagination.vue';
+    import Swal from 'sweetalert2'
 
-    defineProps({ categories: Object })
+    defineProps({ categories: Object })//it comees from Category controller
+
+    //delete category
+    function deleteCategory(id){
+        Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+        if (result.isConfirmed) {
+            router.get('/delete/category/'+id)
+        }
+        });
+    }//end function
 
 </script>
 

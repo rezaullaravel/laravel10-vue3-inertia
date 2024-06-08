@@ -33,4 +33,31 @@ class CategoryController extends Controller
         $category->save();
         return redirect()->route('category.index')->with('message','Category created successfully.');
     }//end method
+
+
+    //category edit form
+    public function edit($id){
+        $category = Category::find($id);
+        return Inertia::render('Admin/Category/Edit',compact('category'));
+    }//end method
+
+
+    //update category
+    public function update(Request $request,$id){
+        $request->validate([
+            'category_name'=>'required|unique:categories,category_name,'.$id,
+        ]);
+
+        $category = Category::find($id);
+        $category->category_name = $request->category_name;
+        $category->save();
+        return redirect()->route('category.index')->with('message','Category updated successfully.');
+    }//end method
+
+
+    //delete category
+    public function delete($id){
+       Category::find($id)->delete();
+        return redirect()->route('category.index')->with('message','Category deleted successfully.');
+    }//end method
 }

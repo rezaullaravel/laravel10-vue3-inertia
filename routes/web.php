@@ -43,4 +43,7 @@ Route::middleware(['admin'])->group(function(){
     Route::get('/category/list',[CategoryController::class,'index'])->name('category.index');
     Route::get('/category/create',[CategoryController::class,'create'])->name('category.create');
     Route::post('/store/category',[CategoryController::class,'store'])->name('category.store');
+    Route::get('/edit/category/{id}',[CategoryController::class,'edit'])->name('category.edit');
+    Route::post('/update/category/{id}',[CategoryController::class,'update'])->name('category.update');
+    Route::get('/delete/category/{id}',[CategoryController::class,'delete'])->name('category.delete');
 });
