@@ -39,6 +39,31 @@
         </li>
         <!--category end--->
 
+
+        <!--brand start--->
+        <li class="nav-item">
+          <Link href="/brand/list" class="nav-link" :class="{ 'active': isActive('/brand/list') }">
+            <i class="nav-icon fas fa-chart-pie"></i>
+            <p>
+              Brand
+            </p>
+          </Link>
+
+        </li>
+        <!--brand end--->
+
+         <!--product start--->
+         <li class="nav-item">
+          <Link href="/product/list" class="nav-link" :class="{ 'active': isActive('/product/list') }">
+            <i class="nav-icon fas fa-chart-pie"></i>
+            <p>
+              Product
+            </p>
+          </Link>
+
+        </li>
+        <!--product end--->
+
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-chart-pie"></i>
@@ -61,10 +86,12 @@
               </a>
             </li>
             <li class="nav-item">
-              <Link href="/logout" class="nav-link">
+
+                <a href="" @click.prevent="logout" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Logout</p>
-              </Link>
+              </a>
+
             </li>
           </ul>
         </li>
@@ -79,10 +106,25 @@
 
 <script setup>
 import { Link,usePage } from '@inertiajs/vue3'
+import { router } from '@inertiajs/vue3'
+import { useForm } from '@inertiajs/vue3'
+import axios from 'axios';
 
+const form = useForm({
+
+
+})
+
+//menu active
 const page = usePage()
 const isActive = (route) => {
   return page.url.startsWith(route)
+}
+
+function logout() {
+  axios.post('/logout').then(() => {
+    window.location.href = '/';
+  });
 }
 
 </script>

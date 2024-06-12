@@ -65,8 +65,7 @@
     import Master  from '../Master.vue';
     import { Link,usePage,router } from '@inertiajs/vue3'
     import Pagination  from '../../../components/Pagination.vue';
-    import Swal from 'sweetalert2'
-
+   
     defineProps({ categories: Object })//it comees from Category controller
 
     //delete category
