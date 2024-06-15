@@ -1,7 +1,9 @@
 <?php
 
 use Inertia\Inertia;
+use App\Http\Middleware\UserRedirect;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\FrontHomeController;
 use App\Http\Controllers\Admin\AdminController;
@@ -9,23 +11,24 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-//home page
-Route::get('/',[FrontHomeController::class,'index'])->middleware('inertia.root:app2');
 
+//frontend route start
+//home page
+Route::get('/',[FrontHomeController::class,'index'])->name('home');
+Route::get('/product/single/{id}',[FrontHomeController::class,'productSingle'])->name('product.single');
+
+//cart
+Route::post('/add-to-cart/{id}',[CartController::class,'addToCart'])->name('add.to.cart');
+
+//category wise product
+Route::get('/category-product/{id}',[FrontHomeController::class,'categoryWiseProduct'])->name('cateWiseProduct');
+//frontend route end
 
 //authentication  route for admin and user
-Route::get('/login',[UserAuthController::class,'loginForm'])->name('admin.login')->middleware('inertia.root:app');
-Route::post('/user-login',[UserAuthController::class,'postLogin'])->middleware('inertia.root:app');
+ Route::get('/login',[UserAuthController::class,'loginForm'])->name('user.login');
+ Route::get('/register',[UserAuthController::class,'registerForm'])->name('user.register');
+ Route::post('user-login',[UserAuthController::class,'postLogin'])->name('user.post.login');
+ Route::post('user-registration',[UserAuthController::class,'postRegistration'])->name('user.post.registration');
 
 //user route
 Route::middleware(['user'])->group(function(){
@@ -35,9 +38,9 @@ Route::middleware(['user'])->group(function(){
 
 
 //admin route
-Route::middleware(['admin','inertia.root:app'])->group(function(){
-    Route::get('/admin/dashboard',[AdminController::class,'index'])->name('admin.dashboard');
-    Route::post('/logout',[AdminController::class,'logout'])->name('logout');
+Route::prefix('admin')->middleware(['admin'])->group(function(){
+    Route::get('/dashboard',[AdminController::class,'index'])->name('admin.dashboard');
+    Route::get('/logout',[AdminController::class,'logout'])->name('logout');
 
 
     //category route

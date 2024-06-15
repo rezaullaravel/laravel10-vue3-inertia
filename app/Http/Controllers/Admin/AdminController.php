@@ -20,7 +20,8 @@ class AdminController extends Controller
     public function logout(Request $request){
 
         Auth::logout();
-        return redirect('/');
+        //return redirect('/');
+       return Inertia::location('/');
     }//end method
 
 }

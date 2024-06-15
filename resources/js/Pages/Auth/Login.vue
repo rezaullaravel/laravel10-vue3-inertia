@@ -1,14 +1,19 @@
 <template>
-    <div class="container pt-5 all">
+    <FrontMaster>
+    <Head>
+        <title>Login page</title>
+    </Head>
+    <div class="container-fluid all">
         <div class="row">
-            <div class="col-sm-4 offset-sm-4">
-                <div class="card">
-                    <div class="card-header">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
                         <h4>User Login
-                            <Link href="/" class="btn btn-primary" style="float: right;">Home</Link>
+
                         </h4>
                     </div>
-                    <div class="card-body">
+                    <div class="panel-body">
                         <div v-if="form.errors.message" class="alert alert-danger">
                             <p>{{ form.errors.message }}</p>
                         </div>
@@ -29,16 +34,22 @@
                                 <input type="submit" class="btn btn-info" value="Login">
                             </div>
                         </form>
+
+                        <p class="text-info">Have you not an account? Please <Link class="badge" href="/register">register</Link> here.</p>
                     </div>
                 </div>
             </div>
+            <div class="col-sm-4"></div>
         </div>
     </div>
+</FrontMaster>
 </template>
 
 <script setup>
 import { useForm,Link } from '@inertiajs/vue3'
-import { router } from '@inertiajs/vue3'
+import { router,Head } from '@inertiajs/vue3'
+import FrontMaster from '../Frontend/FrontMaster.vue';
+
 
 const form = useForm({
   email: '',
@@ -46,9 +57,11 @@ const form = useForm({
 
 })
 
-const submit = () => {
-      form.post('/user-login');
-    };
+ function submit()
+   {
+     form.post('/user-login')
+
+    }
 
 
 
@@ -58,8 +71,11 @@ const submit = () => {
 <style>
 .all{
     background-color: #e5e3e97d;
-    padding-bottom: 9rem;
-    margin-top: 30px;
+    /* padding:13rem 0rem; */
+    margin-top: 7px;
+    margin-bottom: 5px;
+
 }
+
 </style>
 

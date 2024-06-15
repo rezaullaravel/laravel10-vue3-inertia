@@ -29,7 +29,7 @@
 
         <!--category start--->
         <li class="nav-item">
-          <Link href="/category/list" class="nav-link" :class="{ 'active': isActive('/category/list') }">
+          <Link href="/admin/category/list" class="nav-link" :class="{ 'active': isActive('/category/list') }">
             <i class="nav-icon fas fa-chart-pie"></i>
             <p>
               Category
@@ -42,7 +42,7 @@
 
         <!--brand start--->
         <li class="nav-item">
-          <Link href="/brand/list" class="nav-link" :class="{ 'active': isActive('/brand/list') }">
+          <Link href="/admin/brand/list" class="nav-link" :class="{ 'active': isActive('/brand/list') }">
             <i class="nav-icon fas fa-chart-pie"></i>
             <p>
               Brand
@@ -54,7 +54,7 @@
 
          <!--product start--->
          <li class="nav-item">
-          <Link href="/product/list" class="nav-link" :class="{ 'active': isActive('/product/list') }">
+          <Link href="/admin/product/list" class="nav-link" :class="{ 'active': isActive('/product/list') }">
             <i class="nav-icon fas fa-chart-pie"></i>
             <p>
               Product
@@ -65,36 +65,22 @@
         <!--product end--->
 
         <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-chart-pie"></i>
-            <p>
-              Setting
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="pages/charts/chartjs.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>demo</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/charts/flot.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>demo</p>
-              </a>
-            </li>
-            <li class="nav-item">
-
-                <a href="" @click.prevent="logout" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Logout</p>
-              </a>
-
-            </li>
-          </ul>
-        </li>
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Setting
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <Link href="/admin/logout" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Logout</p>
+                </Link>
+              </li>
+            </ul>
+          </li>
 
       </ul>
     </nav>
@@ -121,10 +107,10 @@ const isActive = (route) => {
   return page.url.startsWith(route)
 }
 
-function logout() {
-  axios.post('/logout').then(() => {
-    window.location.href = '/';
-  });
-}
+// function logout() {
+//   axios.post('/admin/logout').then(() => {
+//     window.location.href = '/';
+//   });
+// }
 
 </script>

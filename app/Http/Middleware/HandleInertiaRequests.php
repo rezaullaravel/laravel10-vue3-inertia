@@ -2,8 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Http\Request;
 use Inertia\Middleware;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -14,7 +15,20 @@ class HandleInertiaRequests extends Middleware
      *
      * @var string
      */
-    protected $rootView = 'app';
+    //protected $rootView = 'app';
+
+
+    public function rootView(Request $request)
+    {
+        // Check if the request path starts with 'admin'
+        if ($request->is('admin*')) {
+            return 'app'; // View for admin
+        }   else{
+            return 'frontend'; // View for non-admin
+        }
+
+
+       }//end method
 
     /**
      * Determines the current asset version.
@@ -40,6 +54,13 @@ class HandleInertiaRequests extends Middleware
                 //'message' => $request->session()->get('message')
                 'message' => session('message')
             ],//end flash
+
+            'user'=>[
+                'name'=>Auth::user()->name ?? '',
+                'role'=>Auth::user()->role ?? '',
+            ],
         ]);
-    }
-}
+    }//end method
+
+
+}//end class
