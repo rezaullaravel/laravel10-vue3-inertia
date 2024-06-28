@@ -1,5 +1,5 @@
 <template>
-    <FrontMaster>
+    <FrontMaster :categories="categories" :brands="brands">
     <Head>
         <title>Registration page</title>
     </Head>
@@ -77,6 +77,11 @@ const form = useForm({
   password_confirmation:'',
 
 
+})
+
+defineProps({
+    categories:Object,//from UserAuthController
+    brands:Object,//from UserAuthController
 })
 
  function register()

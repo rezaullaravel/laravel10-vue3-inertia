@@ -2,7 +2,7 @@
 
 
 	<!--header-->
-     <Header :categories="categories"></Header>
+     <Header :categories="categories" :brands="brands" :cart_products="cart_products"></Header>
 	<!--header-->
 		<!--banner-->
 
@@ -27,6 +27,8 @@ import Footer from './partials/Footer.vue';
 import {Link} from '@inertiajs/vue3';
 
 defineProps({
-    categories:Object,//from homeindex.vue componet
+    categories:Object,//from different partial component
+    brands:Object,//from different partial component
+    cart_products:Object,
 })
 </script>

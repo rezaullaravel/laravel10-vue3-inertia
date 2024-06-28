@@ -4,6 +4,7 @@ use Inertia\Inertia;
 use App\Http\Middleware\UserRedirect;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\FrontHomeController;
 use App\Http\Controllers\Admin\AdminController;
@@ -22,6 +23,20 @@ Route::post('/add-to-cart/{id}',[CartController::class,'addToCart'])->name('add.
 
 //category wise product
 Route::get('/category-product/{id}',[FrontHomeController::class,'categoryWiseProduct'])->name('cateWiseProduct');
+
+//brand wise product
+Route::get('/brand-wise-product/{id}',[FrontHomeController::class,'brandWiseProduct'])->name('brand-wise-product');
+
+//cart product
+Route::get('/cart-product-view',[FrontHomeController::class,'cartProduct'])->name('view.cart');
+Route::post('/increase-product-quantity/{id}',[FrontHomeController::class,'cartProductQuantityIncrease']);
+Route::post('/decrease-product-quantity/{id}',[FrontHomeController::class,'cartProductQuantityDecrease']);
+Route::get('/delete-cart-single-product/{id}',[FrontHomeController::class,'cartSingleProductDelete']);
+Route::get('/clear-cart',[FrontHomeController::class,'clearCart']);
+
+//checkout page
+Route::get('/checkout',[CheckoutController::class,'checkout'])->middleware('user');
+Route::post('/place-order',[CheckoutController::class,'placeOrder'])->middleware('user');
 //frontend route end
 
 //authentication  route for admin and user

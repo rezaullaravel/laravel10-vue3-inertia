@@ -1,5 +1,5 @@
 <template>
-    <FrontMaster>
+    <FrontMaster :categories="categories" :brands="brands" :cart_products="cart_products">
     <Head>
         <title>User Dashboard</title>
     </Head>
@@ -31,7 +31,11 @@ import { useForm,Link } from '@inertiajs/vue3'
 import { router,Head } from '@inertiajs/vue3'
 import FrontMaster from '../Frontend/FrontMaster.vue';
 
-
+defineProps({
+    cart_products:Object,//from controller
+    categories:Object,
+    brands:Object,
+})
 const form = useForm({
   name:'',
   email: '',

@@ -1,7 +1,7 @@
 
 
 <template>
-    <FrontMaster :categories="categories">
+    <FrontMaster :categories="categories" :brands="brands" :cart_products="cart_products">
         <Head>
             <title>Product Single</title>
         </Head>
@@ -72,6 +72,8 @@ import { useForm } from '@inertiajs/vue3'
 defineProps({
     product:Object, //this is come from FrontHomeController
     categories:Object,//from FrontHomeController
+    brands:Object,//from FrontHomeController
+    cart_products:Object
 })
 
 // Define reactive state

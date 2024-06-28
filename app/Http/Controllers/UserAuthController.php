@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\User;
 
 use Inertia\Inertia;
+use App\Models\Brand;
+use App\Models\Category;
 use inrtia\ResponseFactor;
 use Illuminate\Http\Request;
 use Inertia\ResponseFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -23,7 +26,9 @@ class UserAuthController extends Controller
                 return redirect()->route('user.dashboard');
             }
         }else{
-            return inertia::render('Auth/Login');
+            $categories = Category::all();
+            $brands = Brand::all();
+            return inertia::render('Auth/Login',compact('categories','brands'));
             //return view('auth.login');
         }
 
@@ -32,7 +37,9 @@ class UserAuthController extends Controller
 
     //user registration form
     public function registerForm(){
-        return inertia::render('Auth/Register');
+        $categories = Category::all();
+        $brands = Brand::all();
+        return inertia::render('Auth/Register',compact('categories','brands'));
     }//end method
 
 
@@ -88,7 +95,20 @@ class UserAuthController extends Controller
 
     //user dashboard
     public function userDashboard(){
-       return Inertia::render('User/Dashboard');
+        if(Auth::check()){
+            $cart_products = DB::table('carts')
+            ->where('user_id',Auth::user()->id)
+            ->join('products','carts.product_id','=','products.id')
+            ->join('brands','products.brand_id','=','brands.id')
+            ->orderBy('id','desc')
+            ->select('carts.*', 'products.product_name','products.thumbnail', 'brands.brand_name')
+            ->get();
+        } else {
+            $cart_products = [];
+      }
+      $categories = Category::limit(20)->get();
+        $brands = Brand::limit(20)->get();
+       return Inertia::render('User/Dashboard',compact('cart_products','categories','brands'));
     }//end method
 
 

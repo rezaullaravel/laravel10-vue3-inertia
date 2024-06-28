@@ -2,11 +2,11 @@
 
     <FrontMaster :categories="categories" :brands="brands" :cart_products=" cart_products">
         <Head>
-            <title>Category Product</title>
+            <title>Brand Product</title>
         </Head>
         <div class="new-arrivals-w3agile">
 					<div class="container">
-						<h2 class="tittle">{{ category.category_name }} Category Products</h2>
+						<h2 class="tittle">{{ brand.brand_name }} Brand Products</h2>
 						<div class="arrivals-grids">
 
 							<div v-if="products.length>0" v-for="product in products" :key="product.id"  class="col-md-3 arrival-grid simpleCart_shelfItem">
@@ -50,10 +50,10 @@ import { useForm } from '@inertiajs/vue3'
 
 defineProps({
     products:Object, //this is come from FrontHomeController
-    category:Object,//this is come from FrontHomeController
-    categories:Object,
+    brand:Object,//this is come from FrontHomeController
     brands:Object,
-     cart_products:Object
+    categories:Object,
+     cart_products:Object,
 
 })
 

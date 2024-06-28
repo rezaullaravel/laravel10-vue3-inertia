@@ -1,6 +1,6 @@
 <template>
 
-    <FrontMaster :categories="categories">
+    <FrontMaster :categories="categories" :brands="brands" :cart_products="cart_products">
         <Head>
             <title>Home page</title>
         </Head>
@@ -48,6 +48,8 @@ import { useForm } from '@inertiajs/vue3'
 defineProps({
     new_products:Object, //this is come from FrontHomeController
     categories:Object,//from FrontHomeController
+    brands:Object,//from FrontHomeController
+     cart_products:Object, //this is come from FrontHomeController
 })
 
 const form = useForm({

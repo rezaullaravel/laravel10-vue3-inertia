@@ -1,5 +1,5 @@
 <template>
-    <FrontMaster>
+    <FrontMaster :categories="categories" :brands="brands">
     <Head>
         <title>Login page</title>
     </Head>
@@ -55,6 +55,12 @@ const form = useForm({
   email: '',
   password: '',
 
+})
+
+
+defineProps({
+    categories:Object,//from UserAuthController
+    brands:Object,//from UserAuthController
 })
 
  function submit()

@@ -45,7 +45,7 @@
 								<ul class="nav navbar-nav">
 									<li class="active">
                                         <Link :href="route('home')" class="act">Home</Link>:</li>
-									<!-- Mega Menu -->
+									<!-- categories start -->
 									<li class="dropdown">
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories<b class="caret"></b></a>
 										<ul class="dropdown-menu multi-column columns-3">
@@ -62,42 +62,26 @@
 											</div>
 										</ul>
 									</li>
-									<li class="dropdown">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown">Brands <b class="caret"></b></a>
+                                    <!--categories end-->
+
+									<!--brands start-->
+                                    <li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown">Brands<b class="caret"></b></a>
 										<ul class="dropdown-menu multi-column columns-3">
 											<div class="row">
-												<div class="col-sm-3  multi-gd-img">
-													<ul class="multi-column-dropdown">
-														<h6>Submenu1</h6>
-														<li><a href="products.html">Clothing</a></li>
-														<li><a href="products.html">Wallets</a></li>
-														<li><a href="products.html">Shoes</a></li>
-														<li><a href="products.html">Watches</a></li>
-														<li><a href="products.html"> Underwear </a></li>
-														<li><a href="products.html">Accessories</a></li>
+												<div class="col-sm-12  multi-gd-img">
+													<ul class="multi-column-dropdown" style="display: inline;">
+														<h6>All Brands</h6>
+
+														<li v-for="brand in brands"><Link :href="route('brand-wise-product',brand.id)" style="border: 1px solid #c4b7b7; text-align: center; padding:3px;"> <img :src="'/upload/brand_images/'+brand.image" alt="Brand_image" width="30" height="30" > {{ brand.brand_name }}</Link></li>
+
 													</ul>
-												</div>
-												<div class="col-sm-3  multi-gd-img">
-													<ul class="multi-column-dropdown">
-														<h6>Submenu2</h6>
-														<li><a href="products.html">Sunglasses</a></li>
-														<li><a href="products.html">Wallets,Bags</a></li>
-														<li><a href="products.html">Footwear</a></li>
-														<li><a href="products.html">Watches</a></li>
-														<li><a href="products.html">Accessories</a></li>
-														<li><a href="products.html">Jewellery</a></li>
-													</ul>
-												</div>
-												<div class="col-sm-3  multi-gd-img">
-														<a href="products1.html"><img src="/frontend/images/woo3.jpg" alt=" "/></a>
-												</div>
-												<div class="col-sm-3  multi-gd-img">
-														<a href="products1.html"><img src="/frontend/images/woo4.jpg" alt=" "/></a>
 												</div>
 												<div class="clearfix"></div>
 											</div>
 										</ul>
 									</li>
+									<!--brands end-->
 								</ul>
 							</div>
 							</nav>
@@ -113,14 +97,24 @@
 							</div>
 						</div>
 						<div class="header-right2">
-							<div class="cart box_1">
-								<a href="checkout.html">
+							<div class="cart box_1" v-if="$page.props.user.name">
+								<Link :href="route('view.cart')">
 									<h3> <div class="total">
-										<span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)</div>
+										 (<span id="simpleCart_quantity">{{cart_products.length}}</span> items)</div>
 										<img src="/frontend/images/bag.png" alt="" />
 									</h3>
-								</a>
-								<p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
+								</Link>:
+								<!-- <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p> -->
+								<div class="clearfix"> </div>
+							</div>
+
+							<div class="cart box_1" v-else>
+								<Link :href="route('view.cart')">
+									<h3> 
+										<img src="/frontend/images/bag.png" alt="" />
+									</h3>
+								</Link>:
+								<!-- <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p> -->
 								<div class="clearfix"> </div>
 							</div>
 						</div>
@@ -135,7 +129,9 @@
 import { Link } from '@inertiajs/vue3'
 
 defineProps({
-    categories:Object//from homeindex and master.vue component
+    categories:Object,
+    brands:Object,
+    cart_products:Object,
 })
 
 </script>
