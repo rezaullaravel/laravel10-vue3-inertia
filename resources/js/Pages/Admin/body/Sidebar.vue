@@ -29,7 +29,7 @@
 
         <!--category start--->
         <li class="nav-item">
-          <Link href="/admin/category/list" class="nav-link" :class="{ 'active': isActive('/category/list') }">
+          <Link href="/admin/category/list" class="nav-link" :class="{ 'active': isActive('/admin/category/list') }">
             <i class="nav-icon fas fa-chart-pie"></i>
             <p>
               Category
@@ -42,7 +42,7 @@
 
         <!--brand start--->
         <li class="nav-item">
-          <Link href="/admin/brand/list" class="nav-link" :class="{ 'active': isActive('/brand/list') }">
+          <Link href="/admin/brand/list" class="nav-link" :class="{ 'active': isActive('/admin/brand/list') }">
             <i class="nav-icon fas fa-chart-pie"></i>
             <p>
               Brand
@@ -54,7 +54,7 @@
 
          <!--product start--->
          <li class="nav-item">
-          <Link href="/admin/product/list" class="nav-link" :class="{ 'active': isActive('/product/list') }">
+          <Link href="/admin/product/list" class="nav-link" :class="{ 'active': isActive('/admin/product/list') }">
             <i class="nav-icon fas fa-chart-pie"></i>
             <p>
               Product
